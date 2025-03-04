@@ -1,10 +1,20 @@
 function refreshTemperature(response) {
   //check if it works using console
-  //console.log(response.data.temperature.current);
+
   let temperatureElements = document.querySelector("#temperature");
   temperatureElements.innerHTML = Math.round(response.data.temperature.current);
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.city;
+  //description
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.condition.description;
+  console.log(response.data);
+  //humidity
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.temperature.humidity + "%";
+  //wind
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = response.data.wind.speed + "km/h";
 }
 
 function searchCity(city) {
