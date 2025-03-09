@@ -1,6 +1,4 @@
 function refreshTemperature(response) {
-  //check if it works using console
-
   let temperatureElements = document.querySelector("#temperature");
   temperatureElements.innerHTML = Math.round(response.data.temperature.current);
   let cityElement = document.querySelector("#city");
@@ -8,13 +6,36 @@ function refreshTemperature(response) {
   //description
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.condition.description;
-  console.log(response.data);
   //humidity
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.temperature.humidity + "%";
+
   //wind
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = response.data.wind.speed + "km/h";
+  //time
+  let date = new Date(response.data.time * 1000);
+  timeElement = document.querySelector("#time");
+  timeElement.innerHTML = formatDate(date);
+}
+
+function formatDate(date) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = "0${minutes}";
+  }
+  return day + " " + hours + ":" + minutes + ",";
 }
 
 function searchCity(city) {
@@ -31,7 +52,6 @@ function searchCity(city) {
 function handleSearchForm(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-form-input");
-  console.log(searchInput.value);
   let cityElement = document.querySelector("#city");
   //the value written in serchInput replaces cityElement
   cityElement.innerHTML = searchInput.value;
