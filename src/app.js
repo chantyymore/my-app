@@ -47,14 +47,15 @@ function formatDate(date) {
 }
 
 function searchCity(city) {
-  //make api call and update the interface
+  console.log("searchCity function is running with city:", city); // Debugging
   let apiKey = "6b534oeab5dabbea88bbtf6452c02346";
   let apiURL =
     "https://api.shecodes.io/weather/v1/current?query=" +
     city +
     "&key=" +
     apiKey;
-  console.log("Fetching data from:", apiURL);
+
+  console.log("Fetching data from:", apiURL); // Debugging
   axios.get(apiURL).then(refreshTemperature);
 }
 
