@@ -54,8 +54,7 @@ function searchCity(city) {
     city +
     "&key=" +
     apiKey;
-
-  console.log("Fetching data from:", apiURL); // Debugging
+  https: console.log("Fetching data from:", apiURL); // Debugging
   axios.get(apiURL).then(refreshTemperature);
 }
 
