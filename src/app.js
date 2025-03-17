@@ -15,15 +15,15 @@ function refreshTemperature(response) {
   windElement.innerHTML = response.data.wind.speed + "km/h";
   //time
   let date = new Date(response.data.time * 1000);
-  let timeElement = document.querySelector("#time");
+  timeElement = document.querySelector("#time");
   timeElement.innerHTML = formatDate(date);
   //icon
   let iconElement = document.querySelector("#icon");
   iconElement.innerHTML = `
-  <img 
-    src="${response.data.condition.icon_url}" 
-    class="weather-app-icon"
-  />
+    <img 
+      src="${response.data.condition.icon_url}" 
+      class="weather-app-icon"
+    />
 `;
 }
 
@@ -41,20 +41,19 @@ function formatDate(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   if (minutes < 10) {
-    minutes = `0${minutes}`;
+    minutes = "0${minutes}";
   }
   return day + " " + hours + ":" + minutes + ",";
 }
 
 function searchCity(city) {
-  console.log("searchCity function is running with city:", city); // Debugging
+  //make api call and update the interface
   let apiKey = "6b534oeab5dabbea88bbtf6452c02346";
   let apiURL =
     "https://api.shecodes.io/weather/v1/current?query=" +
     city +
     "&key=" +
     apiKey;
-  console.log("Fetching data from:", apiURL); // Debugging
   axios.get(apiURL).then(refreshTemperature);
 }
 
